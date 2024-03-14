@@ -47,10 +47,7 @@ module.exports.handleEvent = async function ({ api, event }) {
     let callback = function () {
       return api.sendMessage(
         {
-          body: `====『 𝙿𝚁𝙴𝙵𝙸𝚇 』====\n▱▱▱▱▱▱▱▱▱▱▱▱▱\n✿𝙶𝚛𝚘𝚞𝚙 𝙿𝚛𝚎𝚏𝚒𝚡: ${prefix}\n۞𝚂𝚢𝚜𝚝𝚎𝚖 𝙿𝚛𝚎𝚏𝚒𝚡 : ${global.config.PREFIX}\n✪𝙱𝚘𝚝 𝙽𝚊𝚖𝚎: ${global.config.BOTNAME}\n❁𝙱𝚘𝚝 𝙲𝚞𝚛𝚛𝚎𝚗𝚝𝚕𝚢 𝙷𝚊𝚜:${
-            
-            api.commands.size
-          } 𝙲𝚘𝚖𝚖𝚊𝚗𝚍𝚜\n✴𝙿𝚒𝚗𝚐: ${Date.now() - timeStart}ms\n▱▱▱▱▱▱▱▱▱▱▱▱▱\n『  ${thu} || ${times} 』`,
+          body: `====『 𝙿𝚁𝙴𝙵𝙸𝚇 』====\n▱▱▱▱▱▱▱▱▱▱▱▱▱\n✿𝙶𝚛𝚘𝚞𝚙 𝙿𝚛𝚎𝚏𝚒𝚡: ${prefix}\n۞𝚂𝚢𝚜𝚝𝚎𝚖 𝙿𝚛𝚎𝚏𝚒𝚡 : ${global.config.PREFIX}\n✪𝙱𝚘𝚝 𝙽𝚊𝚖𝚎: ${global.config.BOTNAME}\n✴𝙿𝚒𝚗𝚐: ${Date.now() - timeStart}ms\n▱▱▱▱▱▱▱▱▱▱▱▱▱\n『  ${thu} || ${times} 』`,
           attachment: [fs.createReadStream(__dirname + `/video.mp4`)],
         },
         event.threadID,
