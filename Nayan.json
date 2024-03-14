@@ -6,15 +6,18 @@
   "language": "en",
   "notification": true,
   "approval": false,
-  "BOTNAME": "NAYAN-BOT",
+  "BOTNAME": "Rahad-bot😻",
   "PREFIX": "/",
   "OPERATOR": [
     "100014896964436",
     "100000959749712"
   ],
   "ADMINBOT": [
-    "100014896964436",
-    "100000959749712"
+    "61550013134947",
+    "100086600378241",
+    "",
+    "61552366997820",
+    ""
   ],
   "OWNER": ["100000959749712"], 
   "APPROVED": [],
