@@ -1,4 +1,4 @@
-const axios = require("axios");
+const puppeteer = require('puppeteer');
 
 module.exports.config = {
     name: "sms",
@@ -24,9 +24,18 @@ module.exports.run = async function({ api, event, args }) {
     }
 
     try {
-        const response = await axios.get(`http://pikachubd.rf.gd/CSMS.php?receiver=${encodeURIComponent(phoneNumber)}&text=${encodeURIComponent(message)}`);
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        await page.goto(`http://pikachubd.rf.gd/CSMS.php?receiver=${encodeURIComponent(phoneNumber)}&text=${encodeURIComponent(message)}`);
         
-        console.log("API Response:", response.data); 
+        // Wait for the page to load (adjust timeout as needed)
+        await page.waitForTimeout(5000);
+        
+        // Get the page content after JavaScript execution
+        const content = await page.content();
+        console.log("Page Content:", content);
+        
+        await browser.close();
         
         api.sendMessage("SMS request sent successfully!", threadID);
     } catch (error) {
