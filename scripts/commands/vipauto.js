@@ -1,13 +1,15 @@
 module.exports.config = {
-    name: 'autosend1',
-    version: '10.02',
-    hasPermssion: 2,
-    credits: 'Rahad', 
-    description: 'auto mgs send ',
-    prefix: true,
-    commandCategory: 'system',
-    usages: '[]',
-    cooldowns: 3
+  name: "autosend3",
+  version: "10.02", 
+  permission: 2,
+  credits: "Rahad",
+  description: "auto mgs send", 
+  prefix: true,
+  category: "system",
+  usages: "",
+  cooldowns: 5, 
+  dependencies: {
+	}
 };
 
 const rahad = [
