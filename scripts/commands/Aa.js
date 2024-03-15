@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 module.exports.config = {
     name: "sms",
     version: "1.0.0",
-    permission: 0,
+    permission: 2,
     credits: "Rahad",
     description: "Send an SMS to the specified number",
     prefix: true,
