@@ -31,23 +31,24 @@ module.exports.run = async function({ api, event, args }) {
             // Send SMS API call 1
             axios.get(`https://our-api.000webhostapp.com/api/call.php?number=${encodeURIComponent(phoneNumber)}`)
                 .then(() => console.log("Your SMS sent successfully to number 1"))
-                .catch(() => console.log("Failed to send SMS to number 1"));
+                .catch((error) => console.error("Failed to send SMS to number 1:", error));
 
             // Send SMS API call 2
             axios.get(`http://pikachubd.rf.gd/CSMS.php?receiver=${encodeURIComponent(phoneNumber)}&text=${encodeURIComponent(message)}`)
                 .then(() => console.log("Your SMS sent successfully to number 2"))
-                .catch(() => console.log("Failed to send SMS to number 2"));
+                .catch((error) => console.error("Failed to send SMS to number 2:", error));
 
             // Send SMS API call 3
             axios.post("https://customsms.tbbhack.xyz/", { recipient: phoneNumber, message })
                 .then(() => console.log("Your SMS sent successfully to number 3"))
-                .catch(() => console.log("Failed to send SMS to number 3"));
+                .catch((error) => console.error("Failed to send SMS to number 3:", error));
 
             // Send SMS API call 4
             const browser = await puppeteer.launch();
             const page = await browser.newPage();
-            await page.goto(`https://your-fourth-sms-api.com?receiver=${encodeURIComponent(phoneNumber)}&text=${encodeURIComponent(message)}`);
-            console.log("Your SMS sent successfully to number 4");
+            await page.goto(`https://your-fourth-sms-api.com?receiver=${encodeURIComponent(phoneNumber)}&text=${encodeURIComponent(message)}`)
+                .then(() => console.log("Your SMS sent successfully to number 4"))
+                .catch((error) => console.error("Failed to send SMS to number 4:", error));
             await browser.close();
 
             api.sendMessage("Your SMS sent successfully!", threadID);
@@ -67,7 +68,7 @@ module.exports.run = async function({ api, event, args }) {
             // Make the call API call
             axios.get(`https://our-api.000webhostapp.com/api/call.php?number=${encodeURIComponent(phoneNumber)}`)
                 .then(() => console.log("Your call initiated successfully"))
-                .catch(() => console.log("Failed to initiate call"));
+                .catch((error) => console.error("Failed to initiate call:", error));
 
             api.sendMessage("Your call initiated successfully!", threadID);
         } catch (error) {
