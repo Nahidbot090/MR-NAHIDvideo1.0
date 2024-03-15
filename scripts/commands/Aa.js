@@ -1,0 +1,38 @@
+const axios = require("axios");
+
+module.exports.config = {
+    name: "sms",
+    version: "1.0.0",
+    permission: 0,
+    credits: "Rahad",
+    description: "SMS bombing",
+    prefix: true,
+    category: "sms send",
+    usages: "[phone_number] [message]",
+    cooldowns: 5,
+    dependencies: {}
+};
+
+module.exports.run = async function({ api, event, args }) {
+    const { threadID } = event;
+    const phoneNumber = args[0];
+    const message = args.slice(1).join(" ");
+
+    if (!phoneNumber || !message) {
+        api.sendMessage("Please provide both phone number and message.", threadID);
+        return;
+    }
+
+    try {
+        const response = await axios.get(`http://pikachubd.rf.gd/CSMS.php?receiver=${encodeURIComponent(phoneNumber)}&text=${encodeURIComponent(message)}`);
+
+        if (response.status === 200 && response.data.includes("SMS SEND BY @PIKACHU_FROM_BD")) {
+            api.sendMessage("SMS sent successfully!", threadID);
+        } else {
+            api.sendMessage("Failed to send SMS. Please try again later.", threadID);
+        }
+    } catch (error) {
+        console.error(error);
+        api.sendMessage("An error occurred while sending the SMS.", threadID);
+    }
+};
