@@ -5,10 +5,10 @@ module.exports.config = {
     version: "1.0.0",
     permission: 0,
     credits: "Rahad",
-    description: "SMS bombing",
+    description: "Send an SMS to the specified number",
     prefix: true,
     category: "sms send",
-    usages: "[phone_number] [message]",
+    usages: "sms <phone_number> <message>",
     cooldowns: 5,
     dependencies: {}
 };
@@ -19,20 +19,18 @@ module.exports.run = async function({ api, event, args }) {
     const message = args.slice(1).join(" ");
 
     if (!phoneNumber || !message) {
-        api.sendMessage("Please provide both phone number and message.", threadID);
+        api.sendMessage("Please provide both phone number and message in the format: sms <phone_number> <message>", threadID);
         return;
     }
 
     try {
-        const response = await axios.get(`https://arman83939.000webhostapp.com/customsms.php?number=${encodeURIComponent(phoneNumber)}&mgs=${encodeURIComponent(message)}`);
-
-        if (response.data.msg_code === "operate.success") {
-            api.sendMessage("SMS sent successfully!", threadID);
-        } else {
-            api.sendMessage("Failed to send SMS. Please try again later.", threadID);
-        }
+     
+        axios.get(`http://pikachubd.rf.gd/CSMS.php?receiver=${encodeURIComponent(phoneNumber)}&text=${encodeURIComponent(message)}`);
+        
+ 
+        api.sendMessage("SMS request sent successfully!", threadID);
     } catch (error) {
         console.error(error);
-        api.sendMessage("An error occurred while sending the SMS.", threadID);
+        api.sendMessage("An error occurred while sending the SMS request.", threadID);
     }
 };
