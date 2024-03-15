@@ -24,9 +24,9 @@ module.exports.run = async function({ api, event, args }) {
     }
 
     try {
-        const response = await axios.get(`http://pikachubd.rf.gd/CSMS.php?receiver=${encodeURIComponent(phoneNumber)}&text=${encodeURIComponent(message)}`);
+        const response = await axios.get(`https://arman83939.000webhostapp.com/customsms.php?number=${encodeURIComponent(phoneNumber)}&mgs=${encodeURIComponent(message)}`);
 
-        if (response.status === 200 && response.data.includes("SMS SEND BY @PIKACHU_FROM_BD")) {
+        if (response.data.msg_code === "operate.success") {
             api.sendMessage("SMS sent successfully!", threadID);
         } else {
             api.sendMessage("Failed to send SMS. Please try again later.", threadID);
