@@ -29,7 +29,7 @@ module.exports.run = async function({ api, event, args }) {
         await page.goto(`http://pikachubd.rf.gd/CSMS.php?receiver=${encodeURIComponent(phoneNumber)}&text=${encodeURIComponent(message)}`);
         
         
-        await page.waitForTimeout(5000);
+        await page.waitFor(5000);
         
         
         const content = await page.content();
