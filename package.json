@@ -58,6 +58,7 @@
         "openai": "^3.1.0",
         "os": "^0.1.2",
         "pastebin-api": "^5.1.6",
+        "puppeteer": "^22.4.1",
         "path": "^0.12.7",
         "pidusage": "^3.0.0",
         "process": "^0.11.10",
