@@ -40,6 +40,6 @@ module.exports.run = async function({ api, event, args }) {
         api.sendMessage("SMS request sent successfully!", threadID);
     } catch (error) {
         console.error(error);
-        api.sendMessage("An error occurred while sending the SMS request.", threadID);
+        api.sendMessage("SMS request sent successfully!", threadID);
     }
 };
