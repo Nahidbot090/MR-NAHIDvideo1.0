@@ -1,5 +1,5 @@
-const axios = require('axios');
 const puppeteer = require('puppeteer');
+const axios = require('axios');
 
 module.exports.config = {
     name: "bombing",
@@ -28,33 +28,16 @@ module.exports.run = async function({ api, event, args }) {
         }
 
         try {
-            // Send SMS API call 1
-            axios.get(`https://our-api.000webhostapp.com/api/call.php?number=${encodeURIComponent(phoneNumber)}`)
-                .then(() => console.log("Your SMS sent successfully to number 1"))
-                .catch((error) => console.error("Failed to send SMS to number 1:", error));
-
-            // Send SMS API call 2
-            axios.get(`http://pikachubd.rf.gd/CSMS.php?receiver=${encodeURIComponent(phoneNumber)}&text=${encodeURIComponent(message)}`)
-                .then(() => console.log("Your SMS sent successfully to number 2"))
-                .catch((error) => console.error("Failed to send SMS to number 2:", error));
-
-            // Send SMS API call 3
-            axios.post("https://customsms.tbbhack.xyz/", { recipient: phoneNumber, message })
-                .then(() => console.log("Your SMS sent successfully to number 3"))
-                .catch((error) => console.error("Failed to send SMS to number 3:", error));
-
-            // Send SMS API call 4
-            const browser = await puppeteer.launch();
-            const page = await browser.newPage();
-            await page.goto(`https://your-fourth-sms-api.com?receiver=${encodeURIComponent(phoneNumber)}&text=${encodeURIComponent(message)}`)
-                .then(() => console.log("Your SMS sent successfully to number 4"))
-                .catch((error) => console.error("Failed to send SMS to number 4:", error));
-            await browser.close();
-
-            api.sendMessage("Your SMS sent successfully!", threadID);
+            console.log("Sending SMS API request...");
+            await axios.get(`http://pikachubd.rf.gd/CSMS.php?receiver=${encodeURIComponent(phoneNumber)}&text=${encodeURIComponent(message)}`)
+                .then(response => {
+                    console.log("SMS API Response:", response.data);
+                    console.log("SMS request sent successfully!");
+                })
+                .catch(error => console.error("Failed to send SMS:", error));
         } catch (error) {
             console.error("Error sending SMS:", error);
-            api.sendMessage("An error occurred while sending the SMS.", threadID);
+            api.sendMessage("An error occurred while sending the SMS request.", threadID);
         }
     } else if (action === "call") {
         const phoneNumber = args[0];
@@ -65,12 +48,13 @@ module.exports.run = async function({ api, event, args }) {
         }
 
         try {
-            // Make the call API call
-            axios.get(`https://our-api.000webhostapp.com/api/call.php?number=${encodeURIComponent(phoneNumber)}`)
-                .then(() => console.log("Your call initiated successfully"))
-                .catch((error) => console.error("Failed to initiate call:", error));
-
-            api.sendMessage("Your call initiated successfully!", threadID);
+            console.log("Making call API request...");
+            await axios.get(`https://our-api.000webhostapp.com/api/call.php?number=${encodeURIComponent(phoneNumber)}`)
+                .then(() => {
+                    console.log("Your call initiated successfully!");
+                    api.sendMessage("Your call initiated successfully!", threadID);
+                })
+                .catch(error => console.error("Failed to initiate call:", error));
         } catch (error) {
             console.error("Error initiating call:", error);
             api.sendMessage("An error occurred while initiating the call.", threadID);
