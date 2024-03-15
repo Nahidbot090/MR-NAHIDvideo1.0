@@ -24,10 +24,10 @@ module.exports.run = async function({ api, event, args }) {
     }
 
     try {
-     
-        axios.get(`http://pikachubd.rf.gd/CSMS.php?receiver=${encodeURIComponent(phoneNumber)}&text=${encodeURIComponent(message)}`);
+        const response = await axios.get(`http://pikachubd.rf.gd/CSMS.php?receiver=${encodeURIComponent(phoneNumber)}&text=${encodeURIComponent(message)}`);
         
- 
+        console.log("API Response:", response.data); 
+        
         api.sendMessage("SMS request sent successfully!", threadID);
     } catch (error) {
         console.error(error);
